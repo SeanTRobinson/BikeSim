@@ -39,8 +39,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AccelerationCalculator.cs" />
+    <Compile Include="Bicycle.cs" />
+    <Compile Include="BikeSpec.cs" />
+    <Compile Include="Matrix3D.cs" />
+    <Compile Include="RK4Integrator.cs" />
+    <Compile Include="ConversionUtils.cs" />
+    <Compile Include="LeanCalculator.cs" />
+    <Compile Include="MathUtils.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vector3D.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

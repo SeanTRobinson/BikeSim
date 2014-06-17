@@ -1,0 +1,5 @@
+F:\Google Drive\Development\C#\BikeSim\BikeSim\bin\Debug\BikeSim.dll
+F:\Google Drive\Development\C#\BikeSim\BikeSim\bin\Debug\BikeSim.pdb
+F:\Google Drive\Development\C#\BikeSim\BikeSim\obj\Debug\BikeSim.csprojResolveAssemblyReference.cache
+F:\Google Drive\Development\C#\BikeSim\BikeSim\obj\Debug\BikeSim.dll
+F:\Google Drive\Development\C#\BikeSim\BikeSim\obj\Debug\BikeSim.pdb
