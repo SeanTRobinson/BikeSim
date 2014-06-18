@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace BikeSim
 {
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //Name:			Matrix3D																	
+    //Author:		Sean Robinson (Sean.T.Robinson@googlemail.com)								
+    //Description:	This class is responsible for the generation of 4x4 homogenous matrices.
+    //              Operations for creating rotation, translation and scaling are supplied.
+    //
+    //              Matrix calculations are primarily derived from Wolfram Alpha and
+    //              work presented at: http://inside.mines.edu/~gmurray/ArbitraryAxisRotation/
+    ////////////////////////////////////////////////////////////////////////////////////////////
     public class Matrix3DCreator
     {
         ////////////////////////////////////////////////////////////////////////////////////////////

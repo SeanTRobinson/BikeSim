@@ -9,11 +9,10 @@ namespace BikeSim
     ////////////////////////////////////////////////////////////////////////////////////////////
     //Name:			Matrix3D																	
     //Author:		Sean Robinson (Sean.T.Robinson@googlemail.com)								
-    //Description:	The movement of objects governed by this physics engine is calculated using	
-    //				a specialised vector class.  The vectors used to represent movement and		
-    //				points within the solution are transformed using matrices, these are		
-    //				created and manipulated here.  When a specialised matrix has been created,	
-    //				it is returned to Vector3D to use in the manipulation of a vector.			
+    //Description:	Manipulation of vectors in 3 dimensional space are done through the use of
+	//              matrices.  We use a 4x4 homogenous matrix configuration to enable
+    //              vector manipulation in 3D space.  Basic matrix operations such as rotate
+    //              and translate are supplied.
     ////////////////////////////////////////////////////////////////////////////////////////////
     public class Matrix3D
     {
