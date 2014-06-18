@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Matrix3DCreator.cs" />
     <Compile Include="AccelerationCalculator.cs" />
     <Compile Include="Bicycle.cs" />
     <Compile Include="BikeSpec.cs" />

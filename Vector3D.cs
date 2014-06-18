@@ -103,8 +103,6 @@ namespace BikeSim
 	        y /= _length;
 	        z /= _length;
         }
-
-        //Returns a copy of the vector with normalisation applied
         public Vector3D getNormalised()
         {
 	        calcLength();
@@ -135,6 +133,10 @@ namespace BikeSim
 
 	        return dotProduct;
         }
+        public static double dot(Vector3D lhs, Vector3D rhs)
+        {
+            return lhs.dot(rhs);
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Name:				cross																	
@@ -158,6 +160,10 @@ namespace BikeSim
 
 	        return crossProduct;
         }
+        public static Vector3D cross(Vector3D lhs, Vector3D rhs)
+        {
+            return lhs.cross(rhs);
+        }
 
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Name:				getAngle																
@@ -173,24 +179,28 @@ namespace BikeSim
 	        double dotProduct = dot(vec);
 	        return Math.Acos(dotProduct);
         }
+        public static double getAngle(Vector3D lhs, Vector3D rhs)
+        {
+            return lhs.getAngle(rhs);
+        }
 
         //Adds corresponding variables,
-        public static Vector3D operator+ (Vector3D vec)
+        public static Vector3D operator+ (Vector3D lhs, Vector3D rhs)
         {
 	        Vector3D temp = new Vector3D();
-	        temp.x = x + vec.x;
-	        temp.y = y + vec.y;
-	        temp.z = z + vec.z;
+	        temp.x = lhs.x + rhs.x;
+	        temp.y = lhs.y + rhs.y;
+	        temp.z = lhs.z + rhs.z;
 	        return (temp);
         }
 
         //Subtracts corresponding variables,
-        public static Vector3D operator- (Vector3D vec)
+        public static Vector3D operator- (Vector3D lhs, Vector3D rhs)
         {
 	        Vector3D temp = new Vector3D();
-	        temp.x = x - vec.x;
-	        temp.y = y - vec.y;
-	        temp.z = z - vec.z;
+	        temp.x = lhs.x - rhs.x;
+            temp.y = lhs.y - rhs.y;
+            temp.z = lhs.z - rhs.z;
 	        return (temp);
         }
 
@@ -198,9 +208,9 @@ namespace BikeSim
         public static Vector3D operator *(Vector3D vec, double scalar)
         {
 	        Vector3D temp = new Vector3D();
-	        temp.x = x * scalar;
-	        temp.y = y * scalar;
-	        temp.z = z * scalar;
+	        temp.x = vec.x * scalar;
+	        temp.y = vec.y * scalar;
+	        temp.z = vec.z * scalar;
 	        return (temp);
         }
 
@@ -215,7 +225,7 @@ namespace BikeSim
         ////////////////////////////////////////////////////////////////////////////////////////////
         public static Vector3D operator *(Vector3D vec, Matrix3D m)
         {
-	        Vector3D temp = new Vector3D(x, y, z);
+	        Vector3D temp = new Vector3D(vec.x, vec.y, vec.z);
 	        temp.transform(m);
 	        return (temp);
         }
@@ -232,7 +242,7 @@ namespace BikeSim
         ////////////////////////////////////////////////////////////////////////////////////////////
         public void rotate(double x, double y, double z)
         {
-	        Matrix3D m = Matrix3D.getRotationMatrix(x, y, z);
+	        Matrix3D m = Matrix3DCreator.getRotationMatrix(x, y, z);
 	        transform(m);	
         }
 
@@ -246,7 +256,7 @@ namespace BikeSim
         ////////////////////////////////////////////////////////////////////////////////////////////
         public void scale(double x, double y, double z)
         {
-	        Matrix3D m = Matrix3D.getScaleMatrix(x, y, z);
+            Matrix3D m = Matrix3DCreator.getScaleMatrix(x, y, z);
 	        transform(m);
         }
 
@@ -260,7 +270,7 @@ namespace BikeSim
         ////////////////////////////////////////////////////////////////////////////////////////////
         public void translate(double x, double y, double z)
         {
-	        Matrix3D m = Matrix3D.getTranslationMatrix(x, y, z);
+            Matrix3D m = Matrix3DCreator.getTranslationMatrix(x, y, z);
 	        transform(m);
         }
 

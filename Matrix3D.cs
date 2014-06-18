@@ -180,134 +180,25 @@ namespace BikeSim
             return newMatrix;
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////////
-	    //Name:				getTranslationMatrix.														
-	    //In:				double x, y, z:		The amounts that the created  matrix should			
-	    //										move a point by along each axis.					
-	    //Out:				Matrix3D:           A new translation matrix					
-	    //Description:		This method creates a homogeneous translation matrix that can be used	
-	    //					to translate a vector.  The created matrix takes the form of:			
-	    //																							
-	    //				   |1.0		0.0		0.0		0.0|											
-	    //				   |0.0		1.0		0.0		0.0|											
-	    //				   |0.0		0.0		1.0		0.0|											
-	    //				   | x		 y		 z		1.0|											
-	    ////////////////////////////////////////////////////////////////////////////////////////////
-        public static Matrix3D getTranslationMatrix(double x, double y, double z)
-        {
-            Matrix3D m = new Matrix3D();
-	        m._matrix[0][0] = 1.0;	m._matrix[0][1] = 0.0;	m._matrix[0][2] = 0.0;	m._matrix[0][3] = 0.0;
-	        m._matrix[1][0] = 0.0;	m._matrix[1][1] = 1.0;	m._matrix[1][2] = 0.0;	m._matrix[1][3] = 0.0;
-	        m._matrix[2][0] = 0.0;	m._matrix[2][1] = 0.0;	m._matrix[2][2] = 1.0;	m._matrix[2][3] = 0.0;
-	        m._matrix[3][0] = x;		m._matrix[3][1] = y;		m._matrix[3][2] = z;		m._matrix[3][3] = 1.0;
-            return m;
-        }
-
-
-        ////////////////////////////////////////////////////////////////////////////////////////////
-	    //Name:				Matrix3DRotate.														
-	    //In:				double x, y, z:		The amounts that the created matrix  should		
-	    //										rotate a point by along each axis.					
-	    //Out:				Matrix3D:           A rotation matrix built to rotate a vector by a specified angle.			
-	    //Description:		This method creates a homogeneous rotation matrix that can be used		
-	    //					to rotate a vector.  Three matrices each representing an axis of		
-	    //					rotation are created and then concatenated together to generate a		
-	    //					complete rotation matrix.												
-	    ////////////////////////////////////////////////////////////////////////////////////////////
-        public static Matrix3D getRotationMatrix(double x, double y, double z)
-        {
-	        Matrix3D X = constructXRotationMat(x);
-	        Matrix3D Y = constructXRotationMat(y);
-	        Matrix3D Z = constructXRotationMat(z);
-
-	        Matrix3D rot = Z * Y * X;
-            return rot;
-        }
-
-        //Rotation around X axis
-        private static Matrix3D constructXRotationMat(double angle) {
-	        Matrix3D m = new Matrix3D();
-	        double PI = Math.PI;
-
-	        m._matrix[0][0] = 1.0;	m._matrix[0][1] = 0.0;					    m._matrix[0][2] = 0.0;					    m._matrix[0][3] = 0.0;
-	        m._matrix[1][0] = 0.0;	m._matrix[1][1] = Math.Cos(angle*PI/180);	m._matrix[1][2] = Math.Sin(angle*PI/180);	m._matrix[1][3] = 0.0;
-	        m._matrix[2][0] = 0.0;	m._matrix[2][1] = -Math.Sin(angle*PI/180);	m._matrix[2][2] = Math.Cos(angle*PI/180);	m._matrix[2][3] = 0.0;
-	        m._matrix[3][0] = 0.0;	m._matrix[3][1] = 0.0;					    m._matrix[3][2] = 0.0;					    m._matrix[3][3] = 1.0;
-
-	        return m;
-        }
-
-        //Rotation around Y axis
-        private static Matrix3D constructYRotationMat(double angle) {
-	        Matrix3D m = new Matrix3D();
-	        double PI = Math.PI;
-
-	        m._matrix[0][0] = Math.Cos(angle*PI/180);	m._matrix[0][1] = 0.0;	m._matrix[0][2] = -Math.Sin(angle*PI/180);	m._matrix[0][3] = 0.0;
-	        m._matrix[1][0] = 0.0;					    m._matrix[1][1] = 1.0;	m._matrix[1][2] = 0.0;					    m._matrix[1][3] = 0.0;
-	        m._matrix[2][0] = Math.Sin(angle*PI/180);	m._matrix[2][1] = 0.0;	m._matrix[2][2] = Math.Cos(angle*PI/180);	m._matrix[2][3] = 0.0;
-	        m._matrix[3][0] = 0.0;					    m._matrix[3][1] = 0.0;	m._matrix[3][2] = 0.0;					    m._matrix[3][3] = 1.0;
-
-	        return m;
-        }
-
-        //Rotation around Z axis
-        private static Matrix3D constructZRotationMat(double angle) {
-	        Matrix3D m = new Matrix3D();
-	        double PI = Math.PI;
-
-	        m._matrix[0][0] = Math.Cos(angle*PI/180);	m._matrix[0][1] = Math.Sin(angle*PI/180);	m._matrix[0][2] = 0.0;	m._matrix[0][3] = 0.0;
-	        m._matrix[1][0] = -Math.Sin(angle*PI/180);	m._matrix[1][1] = Math.Cos(angle*PI/180);	m._matrix[1][2] = 0.0;	m._matrix[1][3] = 0.0;
-	        m._matrix[2][0] = 0.0;					    m._matrix[2][1] = 0.0;					    m._matrix[2][2] = 1.0;	m._matrix[2][3] = 0.0;
-	        m._matrix[3][0] = 0.0;					    m._matrix[3][1] = 0.0;					    m._matrix[3][2] = 0.0;	m._matrix[3][3] = 1.0;
-
-	        return m;
-        }
-
-	    ////////////////////////////////////////////////////////////////////////////////////////////
-	    //Name:				Matrix3DScale.															
-	    //In:				double x, y, z:		The amounts that the created matrix should			
-	    //										scale a point by along each axis.					
-	    //Out:				None.																	
-        //Postcondition:	A matrix is created that can be used to scale a vector by.				
-	    //Description:		This method creates a homogeneous scaling matrix that can be used		
-	    //					to scale a vector.  The created matrix takes the form of:				
-	    //																							
-	    //				   | x		0.0		0.0		0.0|											
-	    //				   |0.0		 y		0.0		0.0|											
-	    //				   |0.0		0.0		 z		0.0|											
-	    //				   |0.0		0.0		0.0		1.0|											
-	    ////////////////////////////////////////////////////////////////////////////////////////////
-        public static Matrix3D getScaleMatrix(double x, double y, double z)
-        {
-            Matrix3D m = new Matrix3D();
-
-	        m._matrix[0][0] = x;
-	        m._matrix[1][1] = y;
-	        m._matrix[2][2] = z;
-	        m._matrix[3][3] = 1.0;
-
-            return m;
-        }
-
         //Alternative method, use methods implemented above
         //with values stripped from supplied vector.
         public void Matrix3DTranslate(Vector3D vec)
         {
-            Matrix3D translationMatrix = getTranslationMatrix(vec.x, vec.y, vec.z);
+            Matrix3D translationMatrix = Matrix3DCreator.getTranslationMatrix(vec.x, vec.y, vec.z);
 	        Matrix3D result = this * translationMatrix;
             _matrix = result._matrix;
         }
 
         public void Matrix3DRotate(Vector3D vec)
         {
-            Matrix3D rotationMatrix = getRotationMatrix(vec.x, vec.y, vec.z);
+            Matrix3D rotationMatrix = Matrix3DCreator.getRotationMatrix(vec.x, vec.y, vec.z);
             Matrix3D result = this * rotationMatrix;
             _matrix = result._matrix;
         }
 
         public void Matrix3DScale(Vector3D vec)
         {
-            Matrix3D scaleMatrix = getScaleMatrix(vec.x, vec.y, vec.z);
+            Matrix3D scaleMatrix = Matrix3DCreator.getScaleMatrix(vec.x, vec.y, vec.z);
             Matrix3D result = this * scaleMatrix;
             _matrix = result._matrix;
         }

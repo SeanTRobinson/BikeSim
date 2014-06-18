@@ -8,8 +8,6 @@ namespace BikeSim
 {
     class BikeSpec
     {
-<<<<<<< HEAD
-=======
         public BikeSpec (
             double ObjectWeight = 80.0,
             double casterAngleInDegrees = 18.0,
@@ -140,6 +138,5 @@ namespace BikeSim
             }
         }
 
->>>>>>> Updates to Vector3D and Matrix3D
     }
 }
