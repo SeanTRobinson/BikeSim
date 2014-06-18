@@ -15,12 +15,17 @@ namespace BikeSim
     //				created and manipulated here.  When a specialised matrix has been created,	
     //				it is returned to Vector3D to use in the manipulation of a vector.			
     ////////////////////////////////////////////////////////////////////////////////////////////
-    class Matrix3D
+    public class Matrix3D
     {
 
-        private double[][] _matrix;
-        private double[][] matrix() { return _matrix; }
-        private void setMatrix(double[][] mat) { _matrix = mat; }
+        private double[,] _matrix;
+        private double[,] matrix() { return _matrix; }
+        public Matrix3D()
+        {
+            _matrix = new double[4, 4];
+        }
+
+        private void setMatrix(double[,] mat) { _matrix = mat; }
 
         public double this[int col, int row]
         {
@@ -28,7 +33,7 @@ namespace BikeSim
             {
                 if (indicesAreValid(col, row))
                 {
-                    return _matrix[col][row];
+                    return _matrix[col, row];
                 }
                 throw new ArgumentException("Invalid index for 4x4 homoegenous matrix. Use 0..4");
             }
@@ -36,9 +41,13 @@ namespace BikeSim
             {
                 if (indicesAreValid(col, row))
                 {
-                    _matrix[col][row] = value;
+                    _matrix[col, row] = value;
                 }
-                throw new ArgumentException("Invalid index for 4x4 homoegenous matrix. Use 0..4");
+                else
+                {
+                    String errorString = String.Format("Invalid index ([{0}, {1}]) for 4x4 homoegenous matrix. Use 0..3", col, row);
+                    throw new ArgumentException(errorString);
+                }
             }
         }
    
@@ -71,88 +80,88 @@ namespace BikeSim
         {
 	        Matrix3D C = new Matrix3D();
 	        //Column 1
-	        C._matrix[0][0] =	((a._matrix[0][0] * b._matrix[0][0]) + 
-						         (a._matrix[0][1] * b._matrix[1][0]) + 
-						         (a._matrix[0][2] * b._matrix[2][0]) + 
-						         (a._matrix[0][3] * b._matrix[3][0]));
+	        C._matrix[0, 0] =	((a._matrix[0, 0] * b._matrix[0, 0]) + 
+						         (a._matrix[0, 1] * b._matrix[1, 0]) + 
+						         (a._matrix[0, 2] * b._matrix[2, 0]) + 
+						         (a._matrix[0, 3] * b._matrix[3, 0]));
 
-	        C._matrix[1][0] =	((a._matrix[1][0] * b._matrix[0][0]) + 
-						         (a._matrix[1][1] * b._matrix[1][0]) + 
-						         (a._matrix[1][2] * b._matrix[2][0]) + 
-						         (a._matrix[1][3] * b._matrix[3][0]));
+	        C._matrix[1, 0] =	((a._matrix[1, 0] * b._matrix[0, 0]) + 
+						         (a._matrix[1, 1] * b._matrix[1, 0]) + 
+						         (a._matrix[1, 2] * b._matrix[2, 0]) + 
+						         (a._matrix[1, 3] * b._matrix[3, 0]));
 
-	        C._matrix[2][0] =	((a._matrix[2][0] * b._matrix[0][0]) + 
-						         (a._matrix[2][1] * b._matrix[1][0]) + 
-						         (a._matrix[2][2] * b._matrix[2][0]) + 
-						         (a._matrix[2][3] * b._matrix[3][0]));
+	        C._matrix[2, 0] =	((a._matrix[2, 0] * b._matrix[0, 0]) + 
+						         (a._matrix[2, 1] * b._matrix[1, 0]) + 
+						         (a._matrix[2, 2] * b._matrix[2, 0]) + 
+						         (a._matrix[2, 3] * b._matrix[3, 0]));
 
-	        C._matrix[3][0] =	((a._matrix[3][0] * b._matrix[0][0]) + 
-						         (a._matrix[3][1] * b._matrix[1][0]) + 
-						         (a._matrix[3][2] * b._matrix[2][0]) + 
-						         (a._matrix[3][3] * b._matrix[3][0]));
+	        C._matrix[3, 0] =	((a._matrix[3, 0] * b._matrix[0, 0]) + 
+						         (a._matrix[3, 1] * b._matrix[1, 0]) + 
+						         (a._matrix[3, 2] * b._matrix[2, 0]) + 
+						         (a._matrix[3, 3] * b._matrix[3, 0]));
 
 	        //Column 2
-	        C._matrix[0][1] =	((a._matrix[0][0] * b._matrix[0][1]) + 
-						         (a._matrix[0][1] * b._matrix[1][1]) + 
-						         (a._matrix[0][2] * b._matrix[2][1]) + 
-						         (a._matrix[0][3] * b._matrix[3][1]));
+	        C._matrix[0, 1] =	((a._matrix[0, 0] * b._matrix[0, 1]) + 
+						         (a._matrix[0, 1] * b._matrix[1, 1]) + 
+						         (a._matrix[0, 2] * b._matrix[2, 1]) + 
+						         (a._matrix[0, 3] * b._matrix[3, 1]));
 
-	        C._matrix[1][1] =	((a._matrix[1][0] * b._matrix[0][1]) + 
-						         (a._matrix[1][1] * b._matrix[1][1]) + 
-						         (a._matrix[1][2] * b._matrix[2][1]) + 
-						         (a._matrix[1][3] * b._matrix[3][1]));
+	        C._matrix[1, 1] =	((a._matrix[1, 0] * b._matrix[0, 1]) + 
+						         (a._matrix[1, 1] * b._matrix[1, 1]) + 
+						         (a._matrix[1, 2] * b._matrix[2, 1]) + 
+						         (a._matrix[1, 3] * b._matrix[3, 1]));
 
-	        C._matrix[2][1] =	((a._matrix[2][0] * b._matrix[0][1]) + 
-						         (a._matrix[2][1] * b._matrix[1][1]) + 
-						         (a._matrix[2][2] * b._matrix[2][1]) + 
-						         (a._matrix[2][3] * b._matrix[3][1]));
+	        C._matrix[2, 1] =	((a._matrix[2, 0] * b._matrix[0, 1]) + 
+						         (a._matrix[2, 1] * b._matrix[1, 1]) + 
+						         (a._matrix[2, 2] * b._matrix[2, 1]) + 
+						         (a._matrix[2, 3] * b._matrix[3, 1]));
 
-	        C._matrix[3][1] =	((a._matrix[3][0] * b._matrix[0][1]) + 
-						         (a._matrix[3][1] * b._matrix[1][1]) + 
-						         (a._matrix[3][2] * b._matrix[2][1]) + 
-						         (a._matrix[3][3] * b._matrix[3][1]));
+	        C._matrix[3, 1] =	((a._matrix[3, 0] * b._matrix[0, 1]) + 
+						         (a._matrix[3, 1] * b._matrix[1, 1]) + 
+						         (a._matrix[3, 2] * b._matrix[2, 1]) + 
+						         (a._matrix[3, 3] * b._matrix[3, 1]));
 
 	        //Column 3
-	        C._matrix[0][2] =	((a._matrix[0][0] * b._matrix[0][2]) + 
-						         (a._matrix[0][1] * b._matrix[1][2]) + 
-						         (a._matrix[0][2] * b._matrix[2][2]) + 
-						         (a._matrix[0][3] * b._matrix[3][2]));
+	        C._matrix[0, 2] =	((a._matrix[0, 0] * b._matrix[0, 2]) + 
+						         (a._matrix[0, 1] * b._matrix[1, 2]) + 
+						         (a._matrix[0, 2] * b._matrix[2, 2]) + 
+						         (a._matrix[0, 3] * b._matrix[3, 2]));
 
-	        C._matrix[1][2] =	((a._matrix[1][0] * b._matrix[0][2]) + 
-						         (a._matrix[1][1] * b._matrix[1][2]) + 
-						         (a._matrix[1][2] * b._matrix[2][2]) + 
-						         (a._matrix[1][3] * b._matrix[3][2]));
+	        C._matrix[1, 2] =	((a._matrix[1, 0] * b._matrix[0, 2]) + 
+						         (a._matrix[1, 1] * b._matrix[1, 2]) + 
+						         (a._matrix[1, 2] * b._matrix[2, 2]) + 
+						         (a._matrix[1, 3] * b._matrix[3, 2]));
 
-	        C._matrix[2][2] =	((a._matrix[2][0] * b._matrix[0][2]) + 
-						         (a._matrix[2][1] * b._matrix[1][2]) + 
-						         (a._matrix[2][2] * b._matrix[2][2]) + 
-						         (a._matrix[2][3] * b._matrix[3][2]));
+	        C._matrix[2, 2] =	((a._matrix[2, 0] * b._matrix[0, 2]) + 
+						         (a._matrix[2, 1] * b._matrix[1, 2]) + 
+						         (a._matrix[2, 2] * b._matrix[2, 2]) + 
+						         (a._matrix[2, 3] * b._matrix[3, 2]));
 
-	        C._matrix[3][2] =	((a._matrix[3][0] * b._matrix[0][2]) + 
-						         (a._matrix[3][1] * b._matrix[1][2]) + 
-						         (a._matrix[3][2] * b._matrix[2][2]) + 
-						         (a._matrix[3][3] * b._matrix[3][2]));
+	        C._matrix[3, 2] =	((a._matrix[3, 0] * b._matrix[0, 2]) + 
+						         (a._matrix[3, 1] * b._matrix[1, 2]) + 
+						         (a._matrix[3, 2] * b._matrix[2, 2]) + 
+						         (a._matrix[3, 3] * b._matrix[3, 2]));
 
 	        //Column 4
-	        C._matrix[0][3] =	((a._matrix[0][0] * b._matrix[0][3]) + 
-						         (a._matrix[0][1] * b._matrix[1][3]) + 
-						         (a._matrix[0][2] * b._matrix[2][3]) + 
-						         (a._matrix[0][3] * b._matrix[3][3]));
+	        C._matrix[0, 3] =	((a._matrix[0, 0] * b._matrix[0, 3]) + 
+						         (a._matrix[0, 1] * b._matrix[1, 3]) + 
+						         (a._matrix[0, 2] * b._matrix[2, 3]) + 
+						         (a._matrix[0, 3] * b._matrix[3, 3]));
 
-	        C._matrix[1][3] =	((a._matrix[1][0] * b._matrix[0][3]) + 
-						         (a._matrix[1][1] * b._matrix[1][3]) + 
-						         (a._matrix[1][2] * b._matrix[2][3]) + 
-						         (a._matrix[1][3] * b._matrix[3][3]));
+	        C._matrix[1, 3] =	((a._matrix[1, 0] * b._matrix[0, 3]) + 
+						         (a._matrix[1, 1] * b._matrix[1, 3]) + 
+						         (a._matrix[1, 2] * b._matrix[2, 3]) + 
+						         (a._matrix[1, 3] * b._matrix[3, 3]));
 
-	        C._matrix[2][3] =	((a._matrix[2][0] * b._matrix[0][3]) + 
-						         (a._matrix[2][1] * b._matrix[1][3]) + 
-						         (a._matrix[2][2] * b._matrix[2][3]) + 
-						         (a._matrix[2][3] * b._matrix[3][3]));
+	        C._matrix[2, 3] =	((a._matrix[2, 0] * b._matrix[0, 3]) + 
+						         (a._matrix[2, 1] * b._matrix[1, 3]) + 
+						         (a._matrix[2, 2] * b._matrix[2, 3]) + 
+						         (a._matrix[2, 3] * b._matrix[3, 3]));
 
-	        C._matrix[3][3] =	((a._matrix[3][0] * b._matrix[0][3]) + 
-						         (a._matrix[3][1] * b._matrix[1][3]) + 
-						         (a._matrix[3][2] * b._matrix[2][3]) + 
-						         (a._matrix[3][3] * b._matrix[3][3]));
+	        C._matrix[3, 3] =	((a._matrix[3, 0] * b._matrix[0, 3]) + 
+						         (a._matrix[3, 1] * b._matrix[1, 3]) + 
+						         (a._matrix[3, 2] * b._matrix[2, 3]) + 
+						         (a._matrix[3, 3] * b._matrix[3, 3]));
 
 	        return C;
 }
@@ -214,7 +223,7 @@ namespace BikeSim
             {
 		        for (int j = 0; j < 4; j++)
                 {
-			        output += +_matrix[i][j] + "\t";			
+			        output += +_matrix[i, j] + "\t";			
 		        }
 		        output += "\n";
 	        }

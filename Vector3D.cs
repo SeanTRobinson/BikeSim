@@ -16,7 +16,7 @@ namespace BikeSim
     //              conjunction with the supplied Matrix3D class.  Vectors are all of the
     //              type [X, Y, Z, W].												
     ////////////////////////////////////////////////////////////////////////////////////////////
-    class Vector3D
+    public class Vector3D
     {
         public double x
         {

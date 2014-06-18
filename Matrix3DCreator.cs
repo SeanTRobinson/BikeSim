@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BikeSim
 {
-    class Matrix3DCreator
+    public class Matrix3DCreator
     {
         ////////////////////////////////////////////////////////////////////////////////////////////
         //Name:				getTranslationMatrix.														
@@ -45,49 +45,49 @@ namespace BikeSim
         public static Matrix3D getRotationMatrix(double x, double y, double z)
         {
             Matrix3D X = constructXRotationMat(x);
-            Matrix3D Y = constructXRotationMat(y);
-            Matrix3D Z = constructXRotationMat(z);
+            Matrix3D Y = constructYRotationMat(y);
+            Matrix3D Z = constructZRotationMat(z);
 
-            Matrix3D rot = Z * Y * X;
+            Matrix3D rot = X * Y * Z;
             return rot;
         }
 
         //Rotation around X axis
-        private static Matrix3D constructXRotationMat(double angle)
+        public static Matrix3D constructXRotationMat(double angle)
         {
             Matrix3D m = new Matrix3D();
             double PI = Math.PI;
 
-            m[0, 0] = 1.0;  m[0, 1] = 0.0;                           m[0, 2] = 0.0;                          m[0, 3] = 0.0;
-            m[1, 0] = 0.0;  m[1, 1] = Math.Cos(angle * PI / 180);    m[1, 2] = Math.Sin(angle * PI / 180);   m[1, 3] = 0.0;
-            m[2, 0] = 0.0;  m[2, 1] = -Math.Sin(angle * PI / 180);   m[2, 2] = Math.Cos(angle * PI / 180);   m[2, 3] = 0.0;
-            m[3, 0] = 0.0;  m[3, 1] = 0.0;                           m[3, 2] = 0.0;                          m[3, 3] = 1.0;
+            m[0, 0] = 1.0;  m[0, 1] = 0.0;                           m[0, 2] = 0.0;                             m[0, 3] = 0.0;
+            m[1, 0] = 0.0;  m[1, 1] = Math.Cos(angle * PI / 180);    m[1, 2] = -Math.Sin(angle * PI / 180);     m[1, 3] = 0.0;
+            m[2, 0] = 0.0;  m[2, 1] = Math.Sin(angle * PI / 180);    m[2, 2] = Math.Cos(angle * PI / 180);      m[2, 3] = 0.0;
+            m[3, 0] = 0.0;  m[3, 1] = 0.0;                           m[3, 2] = 0.0;                             m[3, 3] = 1.0;
 
             return m;
         }
 
         //Rotation around Y axis
-        private static Matrix3D constructYRotationMat(double angle)
+        public static Matrix3D constructYRotationMat(double angle)
         {
             Matrix3D m = new Matrix3D();
             double PI = Math.PI;
 
-            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = 0.0;  m[0, 2] = -Math.Sin(angle * PI / 180);  m[0, 3] = 0.0;
+            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = 0.0;  m[0, 2] = Math.Sin(angle * PI / 180);  m[0, 3] = 0.0;
             m[1, 0] = 0.0;                          m[1, 1] = 1.0;  m[1, 2] = 0.0;                          m[1, 3] = 0.0;
-            m[2, 0] = Math.Sin(angle * PI / 180);   m[2, 1] = 0.0;  m[2, 2] = Math.Cos(angle * PI / 180);   m[2, 3] = 0.0;
+            m[2, 0] = -Math.Sin(angle * PI / 180);   m[2, 1] = 0.0;  m[2, 2] = Math.Cos(angle * PI / 180);   m[2, 3] = 0.0;
             m[3, 0] = 0.0;                          m[3, 1] = 0.0;  m[3, 2] = 0.0;                          m[3, 3] = 1.0;
 
             return m;
         }
 
         //Rotation around Z axis
-        private static Matrix3D constructZRotationMat(double angle)
+        public static Matrix3D constructZRotationMat(double angle)
         {
             Matrix3D m = new Matrix3D();
             double PI = Math.PI;
 
-            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = Math.Sin(angle * PI / 180);   m[0, 2] = 0.0;  m[0, 3] = 0.0;
-            m[1, 0] = -Math.Sin(angle * PI / 180);  m[1, 1] = Math.Cos(angle * PI / 180);   m[1, 2] = 0.0;  m[1, 3] = 0.0;
+            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = -Math.Sin(angle * PI / 180);   m[0, 2] = 0.0;  m[0, 3] = 0.0;
+            m[1, 0] = Math.Sin(angle * PI / 180);  m[1, 1] = Math.Cos(angle * PI / 180);   m[1, 2] = 0.0;  m[1, 3] = 0.0;
             m[2, 0] = 0.0;                          m[2, 1] = 0.0;                          m[2, 2] = 1.0;  m[2, 3] = 0.0;
             m[3, 0] = 0.0;                          m[3, 1] = 0.0;                          m[3, 2] = 0.0;  m[3, 3] = 1.0;
 
