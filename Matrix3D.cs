@@ -22,6 +22,18 @@ namespace BikeSim
         public Matrix3D()
         {
             _matrix = new double[4, 4];
+            for (int i=0; i<4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    _matrix[i, j] = 0.0;
+                }
+            }
+            _matrix[0, 0] = 1.0;
+            _matrix[1, 1] = 1.0;
+            _matrix[2, 2] = 1.0;
+            _matrix[3, 3] = 1.0;
+
         }
 
         private void setMatrix(double[,] mat) { _matrix = mat; }

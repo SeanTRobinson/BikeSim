@@ -57,7 +57,8 @@ namespace BikeSim
             Matrix3D Y = constructYRotationMat(y);
             Matrix3D Z = constructZRotationMat(z);
 
-            Matrix3D rot = X * Y * Z;
+            Matrix3D rot = (X * Y);
+            rot *= Z;
             return rot;
         }
 
@@ -81,9 +82,9 @@ namespace BikeSim
             Matrix3D m = new Matrix3D();
             double PI = Math.PI;
 
-            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = 0.0;  m[0, 2] = Math.Sin(angle * PI / 180);  m[0, 3] = 0.0;
+            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = 0.0;  m[0, 2] = Math.Sin(angle * PI / 180);   m[0, 3] = 0.0;
             m[1, 0] = 0.0;                          m[1, 1] = 1.0;  m[1, 2] = 0.0;                          m[1, 3] = 0.0;
-            m[2, 0] = -Math.Sin(angle * PI / 180);   m[2, 1] = 0.0;  m[2, 2] = Math.Cos(angle * PI / 180);   m[2, 3] = 0.0;
+            m[2, 0] = -Math.Sin(angle * PI / 180);  m[2, 1] = 0.0;  m[2, 2] = Math.Cos(angle * PI / 180);   m[2, 3] = 0.0;
             m[3, 0] = 0.0;                          m[3, 1] = 0.0;  m[3, 2] = 0.0;                          m[3, 3] = 1.0;
 
             return m;
@@ -95,8 +96,8 @@ namespace BikeSim
             Matrix3D m = new Matrix3D();
             double PI = Math.PI;
 
-            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = -Math.Sin(angle * PI / 180);   m[0, 2] = 0.0;  m[0, 3] = 0.0;
-            m[1, 0] = Math.Sin(angle * PI / 180);  m[1, 1] = Math.Cos(angle * PI / 180);   m[1, 2] = 0.0;  m[1, 3] = 0.0;
+            m[0, 0] = Math.Cos(angle * PI / 180);   m[0, 1] = -Math.Sin(angle * PI / 180);  m[0, 2] = 0.0;  m[0, 3] = 0.0;
+            m[1, 0] = Math.Sin(angle * PI / 180);   m[1, 1] = Math.Cos(angle * PI / 180);   m[1, 2] = 0.0;  m[1, 3] = 0.0;
             m[2, 0] = 0.0;                          m[2, 1] = 0.0;                          m[2, 2] = 1.0;  m[2, 3] = 0.0;
             m[3, 0] = 0.0;                          m[3, 1] = 0.0;                          m[3, 2] = 0.0;  m[3, 3] = 1.0;
 
