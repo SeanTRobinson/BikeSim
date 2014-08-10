@@ -1,6 +1,8 @@
 BikeSim
 =======
 
+*This Project is temporarily suspended as I focus on learning a new technology stack required for a new position.  I will restart work on the engine once I have settled into the new role.*
+
 A physics library geared towards the modelling of a bicycle in motion.
 
 Abstract
