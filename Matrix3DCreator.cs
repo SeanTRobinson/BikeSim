@@ -8,7 +8,7 @@ namespace BikeSim
 {
     ////////////////////////////////////////////////////////////////////////////////////////////
     //Name:			Matrix3D																	
-    //Author:		Sean Robinson (Sean.T.Robinson@googlemail.com)								
+    //Author:		Sean Robinson								
     //Description:	This class is responsible for the generation of 4x4 homogenous matrices.
     //              Operations for creating rotation, translation and scaling are supplied.
     //
